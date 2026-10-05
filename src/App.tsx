@@ -218,14 +218,14 @@ export default function App() {
             <Reveal delay={80}>
               <h1 id="hero-title" className="font-display text-5xl font-black leading-[1.04] tracking-tight text-white md:text-6xl">
                 Your CV Is Not A{" "}
-                <span className="underline decoration-red-600 decoration-[10px] underline-offset-[10px]">Sellable Offer.</span>
+                <span className="underline decoration-red-600 decoration-[10px] underline-offset-[10px]">Sellable Offer</span>
               </h1>
             </Reveal>
 
             <Reveal delay={160}>
               <p className="mt-8 max-w-3xl text-lg leading-relaxed text-white/80 md:text-xl">
                 Stop volunteering your best advice and discover how to package your knowledge into a profitable consulting or coaching business{" "}
-                <strong className="font-bold text-white">before December</strong> — without quitting your job, becoming an influencer, or spending months on complex automation.
+                <strong className="font-bold text-white">before December</strong> without quitting your job, becoming an influencer, or spending months on complex automation.
               </p>
             </Reveal>
 
