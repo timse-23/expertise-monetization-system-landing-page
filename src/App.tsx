@@ -390,7 +390,7 @@ export default function App() {
             </Reveal>
             <Reveal delay={140}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
-                Timothy is a Go-To-Market Systems Engineer who helps mid-level professionals transform their existing corporate skills into high-value consulting offers. You bring the expertise, and Timothy provides the operational architecture; installing a fully automated, AI-driven revenue engine so you can focus strictly on consulting and coaching.
+                Timothy is a Go-To-Market Systems Engineer and Business Consultant who helps mid-level professionals transform their existing corporate skills into high-value consulting offers. You bring the expertise, and Timothy provides the operational architecture; installing a fully automated, AI-driven revenue engine so you can focus strictly on consulting and coaching.
               </p>
             </Reveal>
           </div>
