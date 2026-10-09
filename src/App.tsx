@@ -201,7 +201,7 @@ export default function App() {
       <div className="border-b border-white/10 bg-navy-950 text-white">
         <p className="mx-auto max-w-4xl px-5 py-3 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-white/80 sm:px-8">
           <span className="mr-2 inline-block h-2 w-2 rounded-full bg-red-600 align-middle" aria-hidden="true" />
-          Free Orientation Workshop · October Cohort · Seats Are Limited
+          Free Webinar · This Saturday · 7:00PM (WAT) · Seats Are Limited
         </p>
       </div>
 
@@ -229,7 +229,19 @@ export default function App() {
               </p>
             </Reveal>
 
-            <Reveal delay={240} className="mt-10">
+            <Reveal delay={200} className="mt-10">
+              <div
+                role="note"
+                className="border-l-4 border-red-600 bg-red-600/15 px-5 py-4 text-base font-bold leading-snug text-white md:text-lg"
+              >
+                <span className="mr-2 text-xs font-black uppercase tracking-[0.18em] text-red-400">Notice</span>
+                The Free Webinar is holding this Saturday by{" "}
+                <span className="whitespace-nowrap underline decoration-red-600 decoration-4 underline-offset-4">7:00PM (WAT)</span>.
+                Save your seat now before spots run out.
+              </div>
+            </Reveal>
+
+            <Reveal delay={240} className="mt-6">
               <CtaBlock label="Save My Free Seat" tone="dark" />
               <p className="mt-6 text-center">
                 <a
