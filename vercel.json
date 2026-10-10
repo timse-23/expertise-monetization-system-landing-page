@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/((?!images/|privacy\.html$|terms\.html$|index\.html$|favicon|robots\.txt$|sitemap\.xml$).+)",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}
