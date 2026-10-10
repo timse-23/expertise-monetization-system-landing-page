@@ -188,8 +188,26 @@ function LegalModal({ doc, onClose }: { doc: LegalDoc | null; onClose: () => voi
    The funnel — one narrow column, straight from hook to action
 --------------------------------------------------------------------------- */
 
+/* Weekly webinar: Saturdays 7:00PM WAT (UTC+1 = 18:00 UTC), starting Oct 17, 2026.
+   Once a session has started, the next Saturday's date is shown. */
+const WEBINAR_FIRST_UTC = Date.UTC(2026, 9, 17, 18, 0);
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function nextWebinarLabel(now: number) {
+  let next = WEBINAR_FIRST_UTC;
+  if (now >= next) next += Math.ceil((now - next + 1) / WEEK_MS) * WEEK_MS;
+  const d = new Date(next + 60 * 60 * 1000); // shift to WAT so getUTC* returns the Lagos calendar date
+  return `Saturday ${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+}
+
 export default function App() {
   const [legalKey, setLegalKey] = useState<"privacy" | "terms" | null>(null);
+  const [webinarDate, setWebinarDate] = useState(() => nextWebinarLabel(Date.now()));
+  useEffect(() => {
+    const id = setInterval(() => setWebinarDate(nextWebinarLabel(Date.now())), 60_000);
+    return () => clearInterval(id);
+  }, []);
   const openLegal = (key: "privacy" | "terms") => (e: MouseEvent) => {
     e.preventDefault();
     setLegalKey(key);
@@ -201,7 +219,7 @@ export default function App() {
       <div className="border-b border-white/10 bg-navy-950 text-white">
         <p className="mx-auto max-w-4xl px-5 py-3 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-white/80 sm:px-8">
           <span className="mr-2 inline-block h-2 w-2 rounded-full bg-red-600 align-middle" aria-hidden="true" />
-          Free Webinar · This Saturday · 7:00PM (WAT) · Seats Are Limited
+          Free Webinar · {webinarDate} · 7:00PM (WAT) · Seats Are Limited
         </p>
       </div>
 
@@ -235,7 +253,7 @@ export default function App() {
                 className="border-l-4 border-red-600 bg-red-600/15 px-5 py-4 text-base font-bold leading-snug text-white md:text-lg"
               >
                 <span className="mr-2 text-xs font-black uppercase tracking-[0.18em] text-red-400">Notice</span>
-                The Free Webinar is holding this Saturday by{" "}
+                The Free Webinar is holding this <span className="underline decoration-red-600 decoration-4 underline-offset-4">{webinarDate}</span> by{" "}
                 <span className="whitespace-nowrap underline decoration-red-600 decoration-4 underline-offset-4">7:00PM (WAT)</span>.
                 Save your seat now before spots run out.
               </div>
