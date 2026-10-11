@@ -393,8 +393,7 @@ export default function App() {
                 <strong className="font-bold text-white">Free Orientation Workshops</strong>.
               </p>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                Just by showing up, you’ll walk away with the exact 7-step expertise monetization blueprint that Engr. Timothy Aderogba uses to transition professionals from underpaid employees to highly-paid specialists. We have already helped{" "}
-                <strong className="font-bold text-white">22+ professionals package a high-ticket offer in 14 days</strong> using this exact framework. During this live session, we will break down the complete “Expertise Monetization into Coaching – Consulting Business” strategy so you can get your offer ready to capture the end-of-year and Q1 rush.
+                Just by showing up, you’ll walk away with the exact 7-step expertise monetization blueprint that Engr. Timothy Aderogba uses to transition professionals from underpaid employees to highly-paid specialists. <strong className="font-bold text-white">178+ professionals are already in</strong>, using this exact framework to package their expertise into high-ticket offers. During this live session, we will break down the complete “Expertise Monetization into Coaching – Consulting Business” strategy so you can get your offer ready to capture the end-of-year and Q1 rush.
               </p>
             </Reveal>
 
