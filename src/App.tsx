@@ -42,6 +42,50 @@ const NEXT_STEPS = [
    Primitives
 --------------------------------------------------------------------------- */
 
+/* Counts from 0 up to `to` the first time it scrolls into view */
+function CountUp({ to, duration = 2200, suffix = "" }: { to: number; duration?: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setValue(to);
+      return;
+    }
+    let raf = 0;
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        if (!entries[0].isIntersecting) return;
+        obs.disconnect();
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / duration, 1);
+          setValue(Math.round(to * (1 - Math.pow(1 - p, 3)))); // ease-out
+          if (p < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(node);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [to, duration]);
+
+  return (
+    <span ref={ref} className="inline-block tabular-nums" aria-label={`${to}${suffix}`}>
+      <span aria-hidden="true">
+        {value}
+        {suffix}
+      </span>
+    </span>
+  );
+}
+
 function Reveal({
   children,
   delay = 0,
@@ -274,8 +318,10 @@ export default function App() {
 
             <Reveal delay={300} className="mt-12">
               <p className="border-t border-white/10 pt-6 text-base text-white/60">
-                <span className="font-body text-2xl font-bold text-red-500">22+</span>{" "}
-                professionals have already used this exact 7-step blueprint to package a high-ticket offer in 14 days.
+                <span className="font-body text-2xl font-bold text-red-500">
+                  <CountUp to={178} suffix="+" />
+                </span>{" "}
+                professionals already in, packaging their expertise into high-ticket offers.
               </p>
             </Reveal>
           </div>
