@@ -319,7 +319,7 @@ export default function App() {
             <Reveal delay={300} className="mt-12">
               <p className="border-t border-white/10 pt-6 text-base text-white/60">
                 <span className="font-body text-2xl font-bold text-red-500">
-                  <CountUp to={178} suffix="+" />
+                  <CountUp to={351} suffix="+" />
                 </span>{" "}
                 professionals already in, packaging their expertise into high-ticket offers.
               </p>
@@ -393,7 +393,7 @@ export default function App() {
                 <strong className="font-bold text-white">Free Orientation Workshops</strong>.
               </p>
               <p className="mt-5 text-lg leading-relaxed text-white/70">
-                Just by showing up, you’ll walk away with the exact 7-step expertise monetization blueprint that Engr. Timothy Aderogba uses to transition professionals from underpaid employees to highly-paid specialists. <strong className="font-bold text-white">178+ professionals are already in</strong>, using this exact framework to package their expertise into high-ticket offers. During this live session, we will break down the complete “Expertise Monetization into Coaching – Consulting Business” strategy so you can get your offer ready to capture the end-of-year and Q1 rush.
+                Just by showing up, you’ll walk away with the exact 7-step expertise monetization blueprint that Engr. Timothy Aderogba uses to transition professionals from underpaid employees to highly-paid specialists. <strong className="font-bold text-white">351+ professionals are already in</strong>, using this exact framework to package their expertise into high-ticket offers. During this live session, we will break down the complete “Expertise Monetization into Coaching – Consulting Business” strategy so you can get your offer ready to capture the end-of-year and Q1 rush.
               </p>
             </Reveal>
 
