@@ -110,3 +110,48 @@ a {
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Depth & texture — subtle, static, never competes with the copy
+--------------------------------------------------------------------------- */
+
+/* Navy sections: soft red glow + cool highlight, a faint grid, and fine grain. */
+.tex-hero {
+  background-color: var(--color-navy-900);
+  background-image:
+    radial-gradient(60rem 28rem at 85% -10%, rgba(220, 38, 38, 0.2), transparent 60%),
+    radial-gradient(48rem 26rem at -10% 110%, rgba(30, 80, 150, 0.35), transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 44px 44px, 44px 44px;
+}
+
+.tex-hero::before,
+.tex-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Light sections: warm off-white with a soft vignette and dot texture. */
+.tex-paper {
+  background-color: #f6f8fb;
+  background-image:
+    radial-gradient(42rem 22rem at 50% -5%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(rgba(7, 26, 50, 0.07) 1px, transparent 1px);
+  background-size: auto, 22px 22px;
+}
+
+.tex-paper::before {
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+}
+
+.tex-paper > *,
+.tex-hero > * {
+  position: relative;
+}
