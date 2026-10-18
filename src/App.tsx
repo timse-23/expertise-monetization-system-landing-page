@@ -570,7 +570,7 @@ export default function App() {
               <div id="register" className="scroll-mt-4 rounded-md border-t-4 border-red-600 bg-white p-6 text-[#0f1c2e] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.65)] sm:p-9">
                 <h3 className="font-display text-2xl font-black tracking-tight text-navy-900 md:text-3xl">Here’s How to Join</h3>
                 <p className="mb-6 mt-3 text-base leading-relaxed text-slate-600">
-                  Please provide your details below. We use your background details to pull real-time case studies from your specific industry during the live walkthrough.
+                  Tell us your industry and get live case studies picked for you. Takes under 60 seconds.
                 </p>
                 <RegistrationForm />
               </div>
