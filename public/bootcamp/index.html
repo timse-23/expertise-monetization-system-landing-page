@@ -50,6 +50,8 @@
     .btn.alt{background:transparent;border:2px solid rgba(255,255,255,.35);box-shadow:none;font-size:1.05rem;padding:16px 24px}
     .btn.alt:hover{background:rgba(255,255,255,.08);border-color:#fff}
     .btn.alt:active{transform:none}
+    .btn.alt{scroll-margin-top:40vh}
+    .btn.alt:target{border-color:#fff;background:rgba(255,255,255,.1)}
     .btn small{display:block;font-size:.78rem;font-weight:500;color:var(--soft);margin-top:2px}
     .fine{margin-top:22px;font-size:14px;color:var(--mute)}
     .back{display:inline-block;margin-top:28px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);text-decoration:none}
@@ -157,7 +159,7 @@
         <p class="warn">⚠ Limited time: price jumps to ₦50,000 after the waitlist closes.</p>
         <div class="btns">
           <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
-          <a class="btn alt" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join Waitlist<small>You will miss out on the bonuses</small></a>
+          <a class="btn alt" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join Waitlist<small>You will miss out on the bonuses</small></a>
         </div>
         <p class="fine">Think how much you can make back in return.</p>
       </div>
