@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071a32" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>You Are In! | Engr. Timothy Aderogba</title>
+  <link rel="canonical" href="https://www.timaderogba.com/registered" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy-950:#04101f;--navy-900:#071a32;--red:#dc2626;--red-dark:#991b1b;--soft:rgba(255,255,255,.78);--mute:rgba(255,255,255,.6);--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--navy-900);color:#fff;font:400 17px/1.7 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+    h1,h2{font-family:"Playfair Display",Georgia,serif;font-weight:900;letter-spacing:-.015em;line-height:1.12;margin:0;text-wrap:balance}
+    p{margin:0;text-wrap:pretty}
+    .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+    .ty{padding:72px 0 80px;text-align:center}
+    .ty h1{font-size:clamp(2.6rem,9vw,4.4rem)}
+    .check{width:64px;height:64px;border-radius:50%;background:var(--red);display:inline-flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;margin-bottom:24px}
+    .when{margin:28px auto 0;display:inline-block;border:1px solid var(--line);background:rgba(255,255,255,.045);padding:12px 22px;font-weight:600;font-size:15.5px}
+    .note{margin:28px auto 0;max-width:620px;color:var(--soft)}
+    .note strong{color:#fff}
+    .imp{margin:48px auto 0;max-width:640px;border-left:4px solid var(--red);background:rgba(220,38,38,.1);padding:32px 26px;text-align:left}
+    .imp h2{font-size:clamp(1.4rem,4.5vw,1.9rem);margin-bottom:12px}
+    .imp p{color:var(--soft)}
+    .btn{display:block;width:100%;max-width:440px;margin:28px auto 0;padding:20px 24px;background:var(--red);color:#fff;font-weight:700;font-size:1.2rem;text-decoration:none;border-radius:6px;box-shadow:0 8px 0 var(--red-dark);transition:transform .08s,box-shadow .08s,background .2s;text-align:center}
+    .btn:hover{background:#ef4444}
+    .btn:active{transform:translateY(8px);box-shadow:0 0 0 var(--red-dark)}
+    footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:13px;color:var(--mute)}
+    @media (max-width:680px){.ty{padding-top:48px}.imp{padding:26px 18px}}
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '28470393309278878');
+  fbq('track', 'PageView');
+  // Thank-you page view = confirmed registration
+  fbq('track', 'Lead');
+  </script>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <main class="wrap">
+    <div class="ty">
+      <div class="check" aria-hidden="true">✓</div>
+      <h1>You Are In!</h1>
+      <p class="when">Saturday, <span id="wd">this week</span> · 7:00 PM WAT</p>
+      <p class="note"><strong>Note:</strong> Your live Google Meet access link has just been sent to your email inbox from <strong>engr@timaderogba.com</strong>. If you don’t see it within a few minutes, check your spam or promotions folder.</p>
+      <div class="imp">
+        <h2>Important: Join the Private WhatsApp Orientation Group</h2>
+        <p>This is where I will be dropping the prompt templates, the exact workshop agenda, and answering your questions before we go live.</p>
+        <a class="btn" id="wa" href="https://chat.whatsapp.com/ELyPZkawgZJICRRZd2sSE1?s=cl&amp;p=a&amp;mlu=4&amp;ilr=4" target="_blank" rel="noopener">Join the Private WhatsApp Group ➔</a>
+      </div>
+    </div>
+  </main>
+  <footer>© Engr. Timothy Aderogba</footer>
+  <script>
+    // Weekly webinar: Saturdays 7:00 PM WAT (18:00 UTC), starting Oct 17, 2026.
+    // Once a session has started, the next Saturday's date is shown (same rule as the main page).
+    (function () {
+      var WEEK = 7 * 24 * 60 * 60 * 1000;
+      var M = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      var next = Date.UTC(2026, 9, 17, 18, 0), now = Date.now();
+      if (now >= next) next += Math.ceil((now - next + 1) / WEEK) * WEEK;
+      var d = new Date(next + 3600000);
+      document.getElementById('wd').textContent = M[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+      document.getElementById('wa').addEventListener('click', function () {
+        try { if (window.fbq) fbq('trackCustom', 'WhatsAppJoinClick'); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
