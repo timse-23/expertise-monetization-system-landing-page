@@ -615,7 +615,7 @@ export default function App() {
         >
           Save My Seat <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </a>
-        <p className="mt-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-white/60">Free · Saturday {date} · 7:00 PM WAT</p>
+        <p className="mt-1.5 text-center text-[10px] font-semibold uppercase leading-snug tracking-[0.1em] text-white/70">Free Webinar | This Saturday | 7:00PM | Seats Are Limited</p>
       </div>
 
       {legalKey && <LegalModal doc={LEGAL[legalKey]} onClose={() => setLegalKey(null)} />}
