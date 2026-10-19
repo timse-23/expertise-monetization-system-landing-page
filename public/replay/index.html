@@ -34,11 +34,18 @@
     .clock div{min-width:84px;padding:10px 8px;background:rgba(0,0,0,.35);border:1px solid var(--line)}
     .clock b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:2.2rem;line-height:1.1;font-variant-numeric:tabular-nums}
     .clock span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-    .video{position:relative;margin-top:36px;aspect-ratio:16/9;background:#000;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden}
+    .press{margin-top:36px;text-align:center;font-weight:700;font-size:clamp(1rem,2.6vw,1.1rem)}
+    .video{position:relative;margin-top:14px;aspect-ratio:16/9;background:#000;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden}
     .video button{all:unset;cursor:pointer;display:block;width:100%;height:100%}
     .video img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s}
     .video button:hover img{transform:scale(1.02)}
     .video button:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+    /* Nudge after 5s: a ring pulses around the cover's play button and a label appears. */
+    .video .ring{position:absolute;left:50%;top:50%;width:35%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);border:4px solid rgba(220,38,38,.9);opacity:0;pointer-events:none}
+    .video .tap{position:absolute;left:50%;bottom:7%;transform:translate(-50%,10px);padding:8px 16px;border-radius:999px;background:var(--red);font-weight:700;font-size:clamp(12px,2.4vw,15px);white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.4);opacity:0;transition:opacity .4s,transform .4s;pointer-events:none}
+    .video.nudge .ring{animation:ring 1.6s ease-out infinite}
+    .video.nudge .tap{opacity:1;transform:translate(-50%,0)}
+    @keyframes ring{0%{opacity:.9;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.35)}}
     .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
     .runtime{margin-top:12px;text-align:center;font-size:14px;color:var(--mute)}
     section{margin-top:64px}
@@ -85,12 +92,15 @@
         </div>
       </header>
 
+      <p class="press"><span class="dot"></span>Press play: this replay disappears at 9:00 PM tonight.</p>
       <div class="video" id="video">
         <button type="button" id="play" aria-label="Play the webinar replay">
           <img src="/images/replay-cover.jpg" width="1280" height="721" alt="Webinar replay: You Have the Skills and Expertise. Are You Earning What They’re Worth?" />
+          <span class="ring" aria-hidden="true"></span>
+          <span class="tap" aria-hidden="true">▶ Tap to watch, sound on</span>
         </button>
       </div>
-      <p class="runtime">Watch to the end for the full picture, plus valuable bonuses you won’t want to miss.</p>
+      <p class="runtime">Press play and watch to the end for the breakdown, plus valuable bonuses for you.</p>
 
       <section>
         <div class="offer">
@@ -148,14 +158,11 @@
       timer = setInterval(tick, 1000);
 
       // Click-to-play: the cover image stands in until the visitor presses play.
-      // Browsers only allow autoplay without a click if the video starts muted, so the 3-second
-      // autoplay is muted; pressing play on the cover plays with sound.
-      function play(muted) {
-        if (!$('play')) return;
-        $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1' + (muted ? '&mute=1' : '') + '" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-      }
-      $('play').addEventListener('click', function () { play(false); });
-      setTimeout(function () { play(true); }, 3000);
+      // Click-to-play only (no autoplay), so every play is visitor-initiated and counts as a YouTube view.
+      $('play').addEventListener('click', function () {
+        $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      });
+      setTimeout(function () { $('video').classList.add('nudge'); }, 5000);
 
       // Exit-intent pop-up, once per visit: cursor leaving through the top of the window on
       // desktop, or a quick scroll back up on touch screens after the visitor has looked around.
