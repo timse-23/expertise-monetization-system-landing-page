@@ -44,12 +44,6 @@
     section{margin-top:64px}
     h2{font-size:clamp(1.6rem,4.5vw,2.2rem);margin-bottom:12px}
     .sub{color:var(--soft);max-width:680px}
-    .chapters{margin-top:24px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
-    .chapters li{border-bottom:1px solid var(--line)}
-    .chapters li:last-child{border-bottom:0}
-    .chapters a{display:flex;gap:18px;align-items:baseline;padding:14px 22px;color:#fff;text-decoration:none;font-weight:600;transition:background .2s}
-    .chapters a:hover{background:rgba(255,255,255,.06)}
-    .chapters time{flex:none;min-width:46px;color:#fca5a5;font-variant-numeric:tabular-nums;font-size:15px}
     .offer{margin-top:28px;border-left:4px solid var(--red);background:rgba(220,38,38,.1);padding:36px 28px;text-align:center}
     .offer h2{margin-bottom:14px}
     .offer p{color:var(--soft);max-width:600px;margin:0 auto}
@@ -65,7 +59,7 @@
     .expired p strong{color:#fff}
     .spacer{height:72px}
     footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:13px;color:var(--mute)}
-    @media (max-width:680px){.hero{padding-top:40px}.clock div{min-width:72px}.offer{padding:28px 18px}.chapters a{padding:12px 16px;gap:14px}}
+    @media (max-width:680px){.hero{padding-top:40px}.clock div{min-width:72px}.offer{padding:28px 18px}}
     @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
   </style>
 </head>
@@ -89,21 +83,6 @@
         </button>
       </div>
       <p class="runtime">About 33 minutes · Grab a notebook. You’ll want to take notes.</p>
-
-      <section>
-        <h2>Jump straight to what you need</h2>
-        <p class="sub">Short on time before it comes down? Tap any chapter to start there.</p>
-        <ul class="chapters">
-          <li><a href="#video" data-t="0"><time>0:00</time>Unlocking your hidden professional value</a></li>
-          <li><a href="#video" data-t="402"><time>6:42</time>My journey: from crisis to career growth</a></li>
-          <li><a href="#video" data-t="733"><time>12:13</time>The Seven-Step Expertise Monetization System</a></li>
-          <li><a href="#video" data-t="998"><time>16:38</time>The golden rule of client acquisition</a></li>
-          <li><a href="#video" data-t="1152"><time>19:12</time>AI as your ultimate business partner</a></li>
-          <li><a href="#video" data-t="1353"><time>22:33</time>Why now is the perfect time to start</a></li>
-          <li><a href="#video" data-t="1512"><time>25:12</time>Your invitation to the Implementation Bootcamp</a></li>
-          <li><a href="#video" data-t="1808"><time>30:08</time>Answering your burning questions</a></li>
-        </ul>
-      </section>
 
       <section>
         <div class="offer">
@@ -152,16 +131,8 @@
       timer = setInterval(tick, 1000);
 
       // Click-to-play: the cover image stands in until the visitor presses play.
-      function play(start) {
-        $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&start=' + (start || 0) + '" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-      }
-      $('play').addEventListener('click', function () { play(0); });
-      document.querySelectorAll('[data-t]').forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          play(+a.getAttribute('data-t'));
-          $('video').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
+      $('play').addEventListener('click', function () {
+        $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
       });
     })();
   </script>
