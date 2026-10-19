@@ -63,6 +63,16 @@
     .back{display:inline-block;margin-top:28px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);text-decoration:none}
     .back:hover{color:#fff}
     .cta{text-align:center;border-top:1px solid var(--line);padding:56px 0 72px}
+    .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,8,18,.78);backdrop-filter:blur(4px);animation:fade .2s ease-out}
+    .modal .box{position:relative;width:100%;max-width:480px;background:var(--navy-900);border:1px solid var(--line);border-top:4px solid var(--red);padding:40px 28px 30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+    .modal h2{font-size:clamp(1.6rem,6vw,2rem)}
+    .modal p{margin-top:12px;color:var(--soft)}
+    .modal .btn{margin:24px auto 0}
+    .modal .no{all:unset;cursor:pointer;display:inline-block;margin-top:22px;font-size:14px;color:var(--mute);text-decoration:underline;text-underline-offset:3px}
+    .modal .no:hover{color:#fff}
+    .modal .x{all:unset;cursor:pointer;position:absolute;top:10px;right:14px;font-size:26px;line-height:1;color:var(--mute)}
+    .modal .x:hover{color:#fff}
+    @keyframes fade{from{opacity:0}}
     .bio{display:flex;gap:24px;align-items:center;margin-top:28px}
     .bio img{width:150px;height:150px;object-fit:cover;object-position:top;border:2px solid var(--red);flex:none}
     footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:13px;color:var(--mute)}
@@ -178,6 +188,16 @@
     </section>
   </main>
 
+  <div class="modal" id="exit" role="dialog" aria-modal="true" aria-labelledby="exit-title" hidden>
+    <div class="box">
+      <button type="button" class="x" data-close aria-label="Close">×</button>
+      <h2 id="exit-title">Not ready to join yet?</h2>
+      <p>Get on the waitlist and be the first to know when the next cohort opens.</p>
+      <a class="btn" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join Waitlist ➔</a>
+      <button type="button" class="no" data-close>No thanks, I’ll miss out</button>
+    </div>
+  </div>
+
   <footer>© Engr. Timothy Aderogba · Expertise Monetization System</footer>
 
   <script>
@@ -211,6 +231,35 @@
         $('back').href = '/';
         $('back').textContent = '← Back to the main page';
       }
+
+      // Exit-intent pop-up, once per visit: cursor leaving through the top of the window on
+      // desktop, or a quick scroll back up on touch screens after the visitor has looked around.
+      // Skipped once the visitor has clicked Pay or Join Waitlist.
+      var shown = false, start = Date.now(), lastY = scrollY, lastT = start;
+      try { shown = sessionStorage.getItem('bootcampExit') === '1'; } catch (e) {}
+      function openExit() {
+        if (shown) return;
+        shown = true;
+        try { sessionStorage.setItem('bootcampExit', '1'); } catch (e) {}
+        $('exit').hidden = false;
+        $('exit').querySelector('.btn').focus();
+      }
+      function closeExit() { $('exit').hidden = true; }
+      document.querySelectorAll('main [data-track]').forEach(function (el) {
+        el.addEventListener('click', function () { shown = true; });
+      });
+      document.addEventListener('mouseout', function (e) {
+        if (!e.relatedTarget && e.clientY <= 0) openExit();
+      });
+      addEventListener('scroll', function () {
+        var now = Date.now(), y = scrollY;
+        if (matchMedia('(pointer:coarse)').matches && now - start > 20000 && lastY > 600 && (lastY - y) / (now - lastT || 1) > 1.5) openExit();
+        lastY = y; lastT = now;
+      }, { passive: true });
+      $('exit').addEventListener('click', function (e) {
+        if (e.target === this || e.target.hasAttribute('data-close')) closeExit();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeExit(); });
     })();
     document.querySelectorAll('[data-track]').forEach(function (el) {
       el.addEventListener('click', function () {

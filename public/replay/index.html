@@ -148,9 +148,14 @@
       timer = setInterval(tick, 1000);
 
       // Click-to-play: the cover image stands in until the visitor presses play.
-      $('play').addEventListener('click', function () {
-        $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-      });
+      // Browsers only allow autoplay without a click if the video starts muted, so the 3-second
+      // autoplay is muted; pressing play on the cover plays with sound.
+      function play(muted) {
+        if (!$('play')) return;
+        $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1' + (muted ? '&mute=1' : '') + '" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      }
+      $('play').addEventListener('click', function () { play(false); });
+      setTimeout(function () { play(true); }, 3000);
 
       // Exit-intent pop-up, once per visit: cursor leaving through the top of the window on
       // desktop, or a quick scroll back up on touch screens after the visitor has looked around.
