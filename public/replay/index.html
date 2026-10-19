@@ -47,8 +47,6 @@
     .offer{margin-top:28px;border-left:4px solid var(--red);background:rgba(220,38,38,.1);padding:36px 28px;text-align:center}
     .offer h2{margin-bottom:14px}
     .offer p{color:var(--soft);max-width:600px;margin:0 auto}
-    .offer strong{color:#fff}
-    .warn{display:inline-block;margin-top:18px;padding:6px 14px;background:rgba(0,0,0,.3);font-size:14px;color:#fecaca}
     .btn{display:block;width:100%;max-width:440px;margin:28px auto 0;padding:20px 24px;background:var(--red);color:#fff;font-weight:700;font-size:1.2rem;text-decoration:none;border-radius:6px;box-shadow:0 8px 0 var(--red-dark);transition:transform .08s,box-shadow .08s,background .2s;text-align:center}
     .btn:hover{background:#ef4444}
     .btn:active{transform:translateY(8px);box-shadow:0 0 0 var(--red-dark)}
@@ -58,6 +56,16 @@
     .expired p{margin:22px auto 0;max-width:600px;color:var(--soft)}
     .expired p strong{color:#fff}
     .spacer{height:72px}
+    .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,8,18,.78);backdrop-filter:blur(4px);animation:fade .2s ease-out}
+    .modal .box{position:relative;width:100%;max-width:480px;background:var(--navy-900);border:1px solid var(--line);border-top:4px solid var(--red);padding:40px 28px 30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+    .modal h2{font-size:clamp(1.6rem,6vw,2rem)}
+    .modal p{margin-top:12px;color:var(--soft)}
+    .modal .btn{margin-top:24px}
+    .modal .no{all:unset;cursor:pointer;display:inline-block;margin-top:22px;font-size:14px;color:var(--mute);text-decoration:underline;text-underline-offset:3px}
+    .modal .no:hover{color:#fff}
+    .modal .x{all:unset;cursor:pointer;position:absolute;top:10px;right:14px;font-size:26px;line-height:1;color:var(--mute)}
+    .modal .x:hover{color:#fff}
+    @keyframes fade{from{opacity:0}}
     footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:13px;color:var(--mute)}
     @media (max-width:680px){.hero{padding-top:40px}.clock div{min-width:72px}.offer{padding:28px 18px}}
     @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -86,14 +94,23 @@
 
       <section>
         <div class="offer">
-          <h2>Knowing the system isn’t the same as building it.</h2>
-          <p>In the <strong>30-Day Sprint</strong>, we build it together: your offer, your positioning and your AI client-acquisition pipeline, in time for the end-of-year corporate budget rush.</p>
-          <p class="warn">⚠ Attendee price of ₦35,000 rises to ₦50,000 on Wednesday at 9:00 PM WAT.</p>
+          <h2>Knowing the system isn’t the same as implementing it.</h2>
+          <p>Let’s build it together, just in time for the end-of-year rush.</p>
           <a class="btn" href="/bootcamp">Join the Bootcamp ➔</a>
         </div>
       </section>
       <div class="spacer"></div>
     </main>
+
+    <div class="modal" id="exit" role="dialog" aria-modal="true" aria-labelledby="exit-title" hidden>
+      <div class="box">
+        <button type="button" class="x" data-close aria-label="Close">×</button>
+        <h2 id="exit-title">Not ready to join yet?</h2>
+        <p>Get on the waitlist and be the first to know when the next cohort opens.</p>
+        <a class="btn" href="https://forms.serlzo.site/2796f73e39c1ac25e8">Join Waitlist ➔</a>
+        <button type="button" class="no" data-close>No thanks, I’ll miss out</button>
+      </div>
+    </div>
   </div>
 
   <main class="wrap" id="gone" hidden>
@@ -134,6 +151,31 @@
       $('play').addEventListener('click', function () {
         $('video').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Webinar replay" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
       });
+
+      // Exit-intent pop-up, once per visit: cursor leaving through the top of the window on
+      // desktop, or a quick scroll back up on touch screens after the visitor has looked around.
+      var shown = false, start = Date.now(), lastY = scrollY, lastT = start;
+      try { shown = sessionStorage.getItem('replayExit') === '1'; } catch (e) {}
+      function openExit() {
+        if (shown || !$('exit')) return;
+        shown = true;
+        try { sessionStorage.setItem('replayExit', '1'); } catch (e) {}
+        $('exit').hidden = false;
+        $('exit').querySelector('.btn').focus();
+      }
+      function closeExit() { $('exit').hidden = true; }
+      document.addEventListener('mouseout', function (e) {
+        if (!e.relatedTarget && e.clientY <= 0) openExit();
+      });
+      addEventListener('scroll', function () {
+        var now = Date.now(), y = scrollY;
+        if (matchMedia('(pointer:coarse)').matches && now - start > 20000 && lastY > 600 && (lastY - y) / (now - lastT || 1) > 1.5) openExit();
+        lastY = y; lastT = now;
+      }, { passive: true });
+      $('exit').addEventListener('click', function (e) {
+        if (e.target === this || e.target.hasAttribute('data-close')) closeExit();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeExit(); });
     })();
   </script>
 </body>
