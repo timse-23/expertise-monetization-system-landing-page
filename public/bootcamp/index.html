@@ -174,7 +174,7 @@
         </div>
         <p class="fine">Think how much you can make back in return.</p>
       </div>
-      <a class="back" href="/">← Back to the main page</a>
+      <a class="back" id="back" href="/replay">▶ Watch the replay again</a>
     </section>
   </main>
 
@@ -206,6 +206,11 @@
         }
       }
       tick(); setInterval(tick, 1000);
+      // Replay link reverts to the home link once the replay comes down (Mon Oct 19, 2026, 9:00 PM WAT).
+      if (Date.now() >= Date.UTC(2026, 9, 19, 20, 0)) {
+        $('back').href = '/';
+        $('back').textContent = '← Back to the main page';
+      }
     })();
     document.querySelectorAll('[data-track]').forEach(function (el) {
       el.addEventListener('click', function () {
