@@ -135,7 +135,7 @@ function CtaButton({ label, id, className = "" }: { label: string; id?: string; 
     <a
       id={id}
       href="#register"
-      className={`group flex w-full items-center justify-center gap-3 sm:inline-flex sm:w-auto rounded-md bg-red-600 px-6 py-5 text-lg font-bold uppercase tracking-wide text-white shadow-[0_8px_0_#991b1b,0_18px_30px_-8px_rgba(220,38,38,0.55)] transition-all duration-150 hover:-translate-y-0.5 hover:bg-red-500 active:translate-y-1.5 active:shadow-[0_2px_0_#991b1b] sm:min-w-[22rem] sm:text-xl ${className}`}
+      className={`group flex w-full items-center justify-center gap-3 sm:inline-flex sm:w-auto rounded-md bg-red-600 px-6 py-5 text-lg font-bold uppercase tracking-wide !text-white shadow-[0_8px_0_#991b1b,0_18px_30px_-8px_rgba(220,38,38,0.55)] transition-all duration-150 hover:-translate-y-0.5 hover:bg-red-500 active:translate-y-1.5 active:shadow-[0_2px_0_#991b1b] sm:min-w-[22rem] sm:text-xl ${className}`}
     >
       <span>{label}</span>
       <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -611,7 +611,7 @@ export default function App() {
         <a
           href="#register"
           tabIndex={showBar ? 0 : -1}
-          className="flex w-full items-center justify-center gap-2 rounded-md bg-red-600 py-3.5 text-base font-bold uppercase tracking-wide text-white active:bg-red-700"
+          className="flex w-full items-center justify-center gap-2 rounded-md bg-red-600 py-3.5 text-base font-bold uppercase tracking-wide !text-white active:bg-red-700"
         >
           Save My Seat <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </a>
