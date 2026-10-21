@@ -173,7 +173,7 @@
         <p class="label" style="margin-top:14px">Today’s attendee price</p>
         <p class="was" id="old-price" hidden>₦35,000</p>
         <h2 id="join-title" class="price"><span id="price">₦35,000</span></h2>
-        <p class="warn" id="warn">⚠ Limited time: price jumps to ₦50,000 on Wednesday at 9:00 PM WAT.</p>
+        <p class="warn" id="warn">⚠ Limited time: price jumps to ₦50,000 on Thursday at 9:00 PM WAT.</p>
         <div class="count" id="count" hidden>
           <p class="label">Price goes up to ₦50,000 in</p>
           <div class="clock"><div><b id="cd-h">00</b><span>Hours</span></div><div><b id="cd-m">00</b><span>Mins</span></div><div><b id="cd-s">00</b><span>Secs</span></div></div>
@@ -184,7 +184,7 @@
         </div>
         <p class="fine">Think how much you can make back in return.</p>
       </div>
-      <a class="back" id="back" href="/replay">▶ Watch the replay again</a>
+      <a class="back" id="back" href="/replay">▶ Webinar Recording</a>
     </section>
   </main>
 
@@ -202,9 +202,9 @@
 
   <script>
     // Weekly price schedule in WAT (UTC+1, no DST), independent of the visitor's timezone.
-    // Mon 00:00 WAT = 0. Price is N50,000 from Wed 21:00 until Sat 19:00; countdown shows the 48h before Wed 21:00.
+    // Mon 00:00 WAT = 0. Price is N50,000 from Thu 21:00 until Sat 19:00; countdown shows the 48h before Thu 21:00.
     (function () {
-      var H = 3600000, UP = 2 * 24 * H + 21 * H, DOWN = 5 * 24 * H + 19 * H;
+      var H = 3600000, UP = 3 * 24 * H + 21 * H, DOWN = 5 * 24 * H + 19 * H;
       var $ = function (id) { return document.getElementById(id); };
       function pad(n) { return (n < 10 ? '0' : '') + n; }
       function tick() {
@@ -215,7 +215,7 @@
         $('old-price').hidden = !high;
         $('warn').textContent = high
           ? '⚠ Price is now ₦50,000. The ₦35,000 rate returns Saturday at 7:00 PM WAT.'
-          : '⚠ Limited time: price jumps to ₦50,000 on Wednesday at 9:00 PM WAT.';
+          : '⚠ Limited time: price jumps to ₦50,000 on Thursday at 9:00 PM WAT.';
         var left = UP - t, show = left > 0 && left <= 48 * H;
         $('count').hidden = !show;
         if (show) {
@@ -226,11 +226,6 @@
         }
       }
       tick(); setInterval(tick, 1000);
-      // Replay link reverts to the home link once the replay comes down (Tue Oct 20, 2026, 10:00 PM WAT).
-      if (Date.now() >= Date.UTC(2026, 9, 20, 21, 0)) {
-        $('back').href = '/';
-        $('back').textContent = '← Back to the main page';
-      }
 
       // Exit-intent pop-up, once per visit: cursor leaving through the top of the window on
       // desktop, or a quick scroll back up on touch screens after the visitor has looked around.
