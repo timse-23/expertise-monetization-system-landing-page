@@ -70,9 +70,11 @@
     body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0}
     body::before{background-color:var(--navy-900);background-image:radial-gradient(60rem 28rem at 85% -10%,rgba(220,38,38,.2),transparent 60%),radial-gradient(48rem 26rem at -10% 110%,rgba(30,80,150,.35),transparent 60%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:auto,auto,44px 44px,44px 44px;z-index:-1}
     body::after{opacity:.16;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");z-index:-1}
-    .q{margin:0;border:1px solid var(--line);border-left:3px solid var(--red);background:rgba(255,255,255,.045);padding:20px}
-    .q blockquote{margin:0;font-size:16px;color:#fff}
-    .q figcaption{margin-top:10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+    .q{margin:0;display:flex;flex-direction:column;border:1px solid var(--line);border-top:3px solid var(--red);background:rgba(255,255,255,.045);padding:18px}
+    .q blockquote{margin:0 0 14px;font-size:16px;font-weight:600;color:#fff}
+    .q img{display:block;width:100%;height:auto;margin-top:auto;border-radius:6px}
+    .grid.proof{grid-template-columns:1fr}
+    @media (min-width:681px){.q{flex-direction:row;align-items:center;gap:28px}.q blockquote{flex:1;margin:0;font-size:1.25rem}.q img{width:50%;margin-top:0}}
     .guar{max-width:440px;font-size:14.5px;line-height:1.5;color:var(--soft)}
     .guar b{color:#fff}
     .hero-price{margin-top:18px;font-size:15px;color:var(--soft)}
@@ -98,7 +100,7 @@
     .bio{display:flex;gap:24px;align-items:center;margin-top:28px}
     .bio img{width:150px;height:150px;object-fit:cover;object-position:top;border:2px solid var(--red);flex:none}
     footer{border-top:1px solid var(--line);padding:22px 20px;text-align:center;font-size:13px;color:var(--mute)}
-    @media (max-width:680px){.grid,.grid.two{grid-template-columns:1fr}.hero{padding-top:44px}.bio{flex-direction:column;align-items:flex-start}.offer{padding:28px 18px}}
+    @media (max-width:680px){.grid,.grid.two,.grid.proof{grid-template-columns:1fr}.hero{padding-top:44px}.bio{flex-direction:column;align-items:flex-start}.offer{padding:28px 18px}}
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
   </style>
   <!-- Meta Pixel Code -->
@@ -145,11 +147,10 @@
     <section>
       <h2>What our community says</h2>
       <p class="sub">Real messages from professionals in the community.</p>
-      <div class="grid two">
-        <figure class="q"><blockquote>“It’s been a productive journey for me. I can offer service and receive payment for it.”</blockquote><figcaption>Community member · WhatsApp</figcaption></figure>
-        <figure class="q"><blockquote>“I worked on it, really took me deep for actual realisation. I even requested for print out design. Thanks so much!”</blockquote><figcaption>Community member · WhatsApp</figcaption></figure>
-        <figure class="q"><blockquote>“Thank you so much for the free prompts. It really helped me.”</blockquote><figcaption>Community member · WhatsApp</figcaption></figure>
-        <figure class="q"><blockquote>“I always come back to check, and it’s been powerful and amazing.”</blockquote><figcaption>Community member · WhatsApp</figcaption></figure>
+      <div class="grid proof">
+        <figure class="q"><blockquote>“I can offer service and receive payment for it.”</blockquote><img src="/images/proof-1.jpg" alt="WhatsApp message from a community member: It's been a productive journey for me. I can offer service and receive payment for it." width="855" height="600" loading="lazy" /></figure>
+        <figure class="q"><blockquote>“Really took me deep for actual realisation.”</blockquote><img src="/images/proof-3.jpg" alt="WhatsApp message from a community member: I worked on it, really took me deep for actual realisation. I even requested for print out design." width="946" height="900" loading="lazy" /></figure>
+        <figure class="q"><blockquote>“It really helped me.”</blockquote><img src="/images/proof-2.jpg" alt="WhatsApp message from a community member: Thank you so much for the free prompts. It really helped me." width="633" height="440" loading="lazy" /></figure>
       </div>
     </section>
 
