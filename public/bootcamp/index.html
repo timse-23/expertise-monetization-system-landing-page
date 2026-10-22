@@ -213,9 +213,7 @@
         var high = t >= UP && t < DOWN;
         $('price').textContent = high ? '₦50,000' : '₦35,000';
         $('old-price').hidden = !high;
-        $('warn').textContent = high
-          ? '⚠ Price is now ₦50,000. The ₦35,000 rate returns Saturday at 7:00 PM WAT.'
-          : '⚠ Limited time: price jumps to ₦50,000 on Thursday at 9:00 PM WAT.';
+        $('warn').hidden = high;
         var left = UP - t, show = left > 0 && left <= 48 * H;
         $('count').hidden = !show;
         if (show) {
