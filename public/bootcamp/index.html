@@ -57,7 +57,8 @@
     .clock b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:2.2rem;line-height:1.1;font-variant-numeric:tabular-nums}
     .clock span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
     .btn.alt{scroll-margin-top:40vh}
-    .btn.alt:target{border-color:#fff;background:rgba(255,255,255,.1)}
+    .wl{font-size:14px;color:var(--mute);text-underline-offset:3px;scroll-margin-top:40vh}
+    .wl:hover,.wl:target{color:#fff}
     .btn small{display:block;font-size:.78rem;font-weight:500;color:var(--soft);margin-top:2px}
     .fine{margin-top:22px;font-size:14px;color:var(--mute)}
     .back{display:inline-block;margin-top:28px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);text-decoration:none}
@@ -115,7 +116,7 @@
   <!-- End Meta Pixel Code -->
 </head>
 <body>
-  <div class="strip"><span class="dot"></span>Live Webinar Offer · Cohort starts Sunday, October 25</div>
+  <div class="strip"><span class="dot"></span>Live Webinar Offer · Next cohort starts <span class="cohort">Sunday, October 25</span></div>
   <main class="wrap">
     <header class="hero">
       <p class="eyebrow">The Monetized Expertise Bootcamp</p>
@@ -162,9 +163,8 @@
 
     <section>
       <h2>30 days. Done-With-You.</h2>
-      <div class="grid two">
-        <div class="c"><b>The 30-Day Sprint</b>Starts Sunday, October 25. Intensive implementation over 4 weeks of direct execution. Outcome: a fully structured, validated and market-ready consulting offering.</div>
-        <div class="c"><b>Delivery Model</b>Done-With-You (DWY): we extract your expertise, build your offer, and deploy custom AI acquisition systems side by side with you.</div>
+      <div class="grid" style="grid-template-columns:1fr">
+        <div class="c"><b>The 30-Day Sprint</b>Next cohort starts <span class="cohort">Sunday, October 25</span>. Intensive implementation over 4 weeks of direct execution. Done-With-You: we extract your expertise, build your offer and deploy custom AI acquisition systems side by side with you. Outcome: a fully structured, validated and market-ready consulting offering.</div>
       </div>
     </section>
 
@@ -198,10 +198,10 @@
         </div>
         <div class="btns">
           <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
-          <p class="guar"><b>✓ 7-Day Money-Back Guarantee.</b> Join, try it, and if it’s not for you within 7 days, ask for a full refund.</p>
-          <a class="btn alt" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join Waitlist<small>You will miss out on the bonuses</small></a>
+          <p class="guar"><b>✓ 7-Day Money-Back Guarantee.</b> Join, try it, and if it’s not for you within 7 days, contact our support team for a full refund.</p>
+          <a class="wl" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Not ready? Join the waitlist (you’ll miss out on the bonuses)</a>
         </div>
-        <p class="fine">Cohort starts Sunday, October 25.</p>
+        <p class="fine">New cohort every Sunday. Next start: <span class="cohort">Sunday, October 25</span>.</p>
       </div>
     </section>
 
@@ -248,6 +248,14 @@
           $('cd-s').textContent = pad(s % 60);
         }
       }
+      // Cohorts start every Sunday (WAT). Show the upcoming Sunday; it rolls over on Monday 00:00 WAT.
+      (function () {
+        var d = new Date(Date.now() + H);
+        d.setUTCDate(d.getUTCDate() + (7 - d.getUTCDay()) % 7);
+        var m = ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getUTCMonth()];
+        var label = 'Sunday, ' + m + ' ' + d.getUTCDate();
+        document.querySelectorAll('.cohort').forEach(function (el) { el.textContent = label; });
+      })();
       tick(); setInterval(tick, 1000);
 
       // Sticky pay bar: only while neither the hero button nor the offer block is on screen.
