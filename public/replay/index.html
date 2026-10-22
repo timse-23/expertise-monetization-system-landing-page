@@ -61,6 +61,9 @@
     .expired h1{font-size:clamp(2.4rem,8vw,4rem)}
     .expired p{margin:22px auto 0;max-width:600px;color:var(--soft)}
     .expired p strong{color:#fff}
+    .expired .when{display:inline-block;border:1px solid var(--line);background:rgba(255,255,255,.045);padding:12px 22px;font-weight:600;font-size:15.5px;color:#fff}
+    .alt{display:inline-block;margin-top:22px;font-size:14px;color:var(--mute);text-decoration:underline;text-underline-offset:3px}
+    .alt:hover{color:#fff}
     .spacer{height:72px}
     .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,8,18,.78);backdrop-filter:blur(4px);animation:fade .2s ease-out}
     .modal .box{position:relative;width:100%;max-width:480px;background:var(--navy-900);border:1px solid var(--line);border-top:4px solid var(--red);padding:40px 28px 30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.6)}
@@ -102,9 +105,10 @@
 
       <section>
         <div class="offer">
-          <h2>Knowing the system isn’t the same as implementing it.</h2>
-          <p>Let’s build it together, just in time for the end-of-year rush.</p>
-          <a class="btn" href="/bootcamp">Join the Bootcamp ➔</a>
+          <h2>Want to ask your questions live?</h2>
+          <p>Join the next free webinar: <strong>Saturday, <span class="wd">this week</span> · 7:00 PM WAT</strong>.</p>
+          <a class="btn" href="/">Reserve My Free Seat ➔</a>
+          <a class="alt" href="/bootcamp">Or explore the Bootcamp →</a>
         </div>
       </section>
       <div class="spacer"></div>
@@ -125,8 +129,10 @@
     <div class="expired">
       <div class="icon" aria-hidden="true">⏱</div>
       <h1>This Recording Has Expired</h1>
-      <p>The replay window has closed. The knowledge didn’t go anywhere, though. <strong>Inside the Monetized Expertise Bootcamp, you get the full system and build it side by side with me</strong>, from packaging your offer to landing your first high-value contracts.</p>
-      <a class="btn" href="/bootcamp">Join the Bootcamp ➔</a>
+      <p>The replay window has closed, but you can still <strong>catch it live</strong>. Join the next free webinar and get your questions answered in real time.</p>
+      <p class="when">Saturday, <span class="wd">this week</span> · 7:00 PM WAT</p>
+      <a class="btn" href="/">Reserve My Free Seat ➔</a>
+      <a class="alt" href="/bootcamp">Or explore the Bootcamp →</a>
     </div>
   </main>
 
@@ -138,6 +144,14 @@
       var END = Date.UTC(2026, 9, 20, 21, 0), ID = '6UHHgmA68fY';
       var $ = function (id) { return document.getElementById(id); };
       function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+      // Next weekly webinar: Saturdays 7:00 PM WAT (18:00 UTC), same rule as the registered page.
+      var WEEK = 7 * 24 * 3600000, M = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      var next = Date.UTC(2026, 9, 17, 18, 0), now = Date.now();
+      if (now >= next) next += Math.ceil((now - next + 1) / WEEK) * WEEK;
+      var wd = new Date(next + 3600000);
+      document.querySelectorAll('.wd').forEach(function (el) { el.textContent = M[wd.getUTCMonth()] + ' ' + wd.getUTCDate(); });
+
       var timer;
       function tick() {
         var left = END - Date.now();
@@ -164,8 +178,10 @@
 
       // Exit-intent pop-up, once per visit: cursor leaving through the top of the window on
       // desktop, or a quick scroll back up on touch screens after the visitor has looked around.
-      var shown = false, start = Date.now(), lastY = scrollY, lastT = start;
-      try { shown = sessionStorage.getItem('replayExit') === '1'; } catch (e) {}
+      // Turned off for now: set EXIT_POPUP to true to bring it back.
+      var EXIT_POPUP = false;
+      var shown = !EXIT_POPUP, start = Date.now(), lastY = scrollY, lastT = start;
+      try { shown = shown || sessionStorage.getItem('replayExit') === '1'; } catch (e) {}
       function openExit() {
         if (shown || !$('exit')) return;
         shown = true;
