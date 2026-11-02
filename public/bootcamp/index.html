@@ -77,9 +77,6 @@
     @media (min-width:681px){.q{flex-direction:row;align-items:center;gap:28px}.q blockquote{flex:1;margin:0;font-size:1.25rem}.q img{width:50%;margin-top:0}}
     .guar{max-width:440px;font-size:14.5px;line-height:1.5;color:var(--soft)}
     .guar b{color:#fff}
-    .hero-price{margin-top:18px;font-size:15px;color:var(--soft)}
-    .hero-price b{color:#fff;font-size:1.15em}
-    .hero-price s{color:var(--mute);margin-right:6px}
     .bar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(4,16,31,.94);border-top:1px solid var(--line);backdrop-filter:blur(6px)}
     .bar p{font-size:14px;line-height:1.3;color:var(--soft)}
     .bar p b{display:block;color:#fff;font-size:1.25rem;font-family:"Playfair Display",Georgia,serif}
@@ -126,9 +123,8 @@
       <h1>You Have the Skills and Expertise. <span>Are You Earning What They’re Worth?</span></h1>
       <p class="lede"><strong>Your CV is not a consulting offer.</strong> In 30 days, we package your expertise into a fully structured, validated and market-ready consulting business, and deploy AI client-acquisition systems side by side with you.</p>
       <div class="btns" style="align-items:flex-start">
-        <a class="btn" id="hero-cta" href="#join">Pay to Join Now</a>
+        <a class="btn" id="hero-cta" href="#join">Yes, I’m Interested ↓</a>
       </div>
-      <p class="hero-price">Today: <s id="hp-old" hidden>₦35,000</s><b id="hp">₦35,000</b> · 7-day refund policy · No coding required</p>
     </header>
 
     <section>
@@ -229,8 +225,7 @@
         var high = t >= UP && t < DOWN;
         $('price').textContent = high ? '₦50,000' : '₦35,000';
         $('old-price').hidden = !high;
-        $('hp').textContent = $('bar-price').textContent = $('price').textContent;
-        $('hp-old').hidden = !high;
+        $('bar-price').textContent = $('price').textContent;
         $('warn').hidden = high;
         var left = UP - t, show = left > 0 && left <= 48 * H;
         $('count').hidden = !show;
