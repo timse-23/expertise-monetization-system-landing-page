@@ -78,8 +78,7 @@
     .guar{max-width:440px;font-size:14.5px;line-height:1.5;color:var(--soft)}
     .guar b{color:#fff}
     .bar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(4,16,31,.94);border-top:1px solid var(--line);backdrop-filter:blur(6px)}
-    .bar p{font-size:14px;line-height:1.3;color:var(--soft)}
-    .bar p b{display:block;color:#fff;font-size:1.25rem;font-family:"Playfair Display",Georgia,serif}
+    .bar p{font-size:15px;font-weight:600;line-height:1.3;color:#fff}
     .bar .btn{width:auto;max-width:none;padding:12px 24px;font-size:1rem;box-shadow:0 4px 0 var(--red-dark)}
     .bar .btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--red-dark)}
     footer{padding-bottom:84px!important}
@@ -195,8 +194,8 @@
     </section>
 
     <div class="bar" id="bar" hidden>
-      <p>Today’s price · 7-day refund<b id="bar-price">₦35,000</b></p>
-      <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
+      <p>Do you have any concerns?</p>
+      <a class="btn" href="https://wa.me/2349130072193?text=I%20just%20explored%20the%20bootcamp%20from%20your%20website" target="_blank" rel="noopener noreferrer" data-track="Contact">Chat with Engr. Tim</a>
     </div>
   </main>
 
@@ -225,7 +224,6 @@
         var high = t >= UP && t < DOWN;
         $('price').textContent = high ? '₦50,000' : '₦35,000';
         $('old-price').hidden = !high;
-        $('bar-price').textContent = $('price').textContent;
         $('warn').hidden = high;
         var left = UP - t, show = left > 0 && left <= 48 * H;
         $('count').hidden = !show;
@@ -246,7 +244,7 @@
       })();
       tick(); setInterval(tick, 1000);
 
-      // Sticky pay bar: only while neither the hero button nor the offer block is on screen.
+      // Sticky chat bar: only while neither the hero button nor the offer block is on screen.
       if ('IntersectionObserver' in window) {
         var vis = {};
         var io = new IntersectionObserver(function (es) {
