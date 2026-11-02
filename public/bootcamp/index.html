@@ -57,11 +57,11 @@
     .clock b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:2.2rem;line-height:1.1;font-variant-numeric:tabular-nums}
     .clock span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
     .btn.alt{scroll-margin-top:40vh}
-    .wl{font-size:14px;color:var(--mute);text-underline-offset:3px;scroll-margin-top:40vh}
-    .wl:hover,.wl:target{color:#fff}
-    .wl-note{margin-top:-18px;font-size:12px;color:rgba(255,255,255,.4)}
+    .btn.wl{font-weight:500}
+    .btn.wl:target{border-color:#fff}
     .btn small{display:block;font-size:.78rem;font-weight:500;color:var(--soft);margin-top:2px}
     .fine{margin-top:22px;font-size:14px;color:var(--mute)}
+    .btns .fine{margin-top:-8px}
     .back{display:inline-block;margin-top:28px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);text-decoration:none}
     .back:hover{color:#fff}
     /* Texture matches the homepage navy sections: red/blue glows, faint grid, fine grain (static, fixed behind content). */
@@ -119,14 +119,14 @@
   <!-- End Meta Pixel Code -->
 </head>
 <body>
-  <div class="strip"><span class="dot"></span>Live Webinar Offer · Next cohort starts <span class="cohort">Sunday, October 25</span></div>
+  <div class="strip"><span class="dot"></span>Live Webinar Offer · New cohort starts <span class="cohort">Sunday, October 25</span></div>
   <main class="wrap">
     <header class="hero">
       <p class="eyebrow">The Monetized Expertise Bootcamp</p>
       <h1>You Have the Skills and Expertise. <span>Are You Earning What They’re Worth?</span></h1>
       <p class="lede"><strong>Your CV is not a consulting offer.</strong> In 30 days, we package your expertise into a fully structured, validated and market-ready consulting business, and deploy AI client-acquisition systems side by side with you.</p>
       <div class="btns" style="align-items:flex-start">
-        <a class="btn" id="hero-cta" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
+        <a class="btn" id="hero-cta" href="#join">Pay to Join Now</a>
       </div>
       <p class="hero-price">Today: <s id="hp-old" hidden>₦35,000</s><b id="hp">₦35,000</b> · 7-day refund policy · No coding required</p>
     </header>
@@ -157,15 +157,16 @@
     <section>
       <h2>30 days. Done-With-You.</h2>
       <div class="grid" style="grid-template-columns:1fr">
-        <div class="c"><b>The 30-Day Sprint</b>Next cohort starts <span class="cohort">Sunday, October 25</span>. Intensive implementation over 4 weeks of direct execution. Done-With-You: we extract your expertise, build your offer and deploy custom AI acquisition systems side by side with you. Outcome: a fully structured, validated and market-ready consulting offering.</div>
+        <div class="c"><b>The 30-Day Sprint</b>New cohort starts <span class="cohort">Sunday, October 25</span>. Intensive implementation over 4 weeks of direct execution. Done-With-You: we extract your expertise, build your offer and deploy custom AI acquisition systems side by side with you. Outcome: a fully structured, validated and market-ready consulting offering.</div>
       </div>
     </section>
 
     <section>
       <h2>Will it fit my life?</h2>
-      <div class="grid two">
+      <div class="grid">
         <div class="c"><b>“I don’t have time”</b>Built for working professionals. Recorded classes need only focused weekend hours, and AI workflows automate client acquisition and operational overhead.</div>
         <div class="c"><b>“Do I need to code?”</b>No coding required. Bring your domain expertise; we provide the operational architecture and plug-and-play templates.</div>
+        <div class="c"><b>“What if it’s not for me?”</b>7-day refund policy. Join, start the work, and if it’s not the right fit within the first 7 days, you get your money back.</div>
       </div>
     </section>
 
@@ -191,10 +192,9 @@
         </div>
         <div class="btns">
           <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
-          <a class="wl" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Not ready? Join the next waitlist</a>
-          <p class="wl-note">(you might miss out on the bonuses)</p>
+          <p class="fine">New cohort starts: <span class="cohort">Sunday, October 25</span>.</p>
+          <a class="btn alt wl" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join the Waitlist<small>Not ready yet? Secure your discounted rate now</small></a>
         </div>
-        <p class="fine">Next cohort starts: <span class="cohort">Sunday, October 25</span>.</p>
       </div>
     </section>
 
