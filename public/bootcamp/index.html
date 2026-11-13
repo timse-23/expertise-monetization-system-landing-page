@@ -51,11 +51,6 @@
     .btn.alt:hover{background:rgba(255,255,255,.08);border-color:#fff}
     .btn.alt:active{transform:none}
     [hidden]{display:none!important}
-    .count{margin-top:22px}
-    .clock{display:flex;justify-content:center;gap:10px;margin-top:8px}
-    .clock div{min-width:84px;padding:10px 8px;background:rgba(0,0,0,.35);border:1px solid var(--line)}
-    .clock b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:2.2rem;line-height:1.1;font-variant-numeric:tabular-nums}
-    .clock span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
     .btn.alt{scroll-margin-top:40vh}
     .btn.wl{font-weight:500}
     .btn.wl:target{border-color:#fff}
@@ -115,7 +110,7 @@
   <!-- End Meta Pixel Code -->
 </head>
 <body>
-  <div class="strip"><span class="dot"></span>Live Webinar Offer · New cohort starts <span class="cohort">Sunday, October 25</span></div>
+  <div class="strip"><span class="dot"></span>Now enrolling · New cohort starts <span class="cohort">Sunday, October 25</span></div>
   <main class="wrap">
     <header class="hero">
       <p class="eyebrow">The Monetized Expertise Bootcamp</p>
@@ -177,18 +172,11 @@
       <div class="offer">
         <p class="label">Total combined value</p>
         <p class="was">₦725,000</p>
-        <p class="label" style="margin-top:14px">Today’s attendee price</p>
-        <p class="was" id="old-price" hidden>₦35,000</p>
-        <h2 id="join-title" class="price"><span id="price">₦35,000</span></h2>
-        <p class="warn" id="warn">⚠ Limited time: price jumps to ₦50,000 on Thursday at 9:00 PM WAT.</p>
-        <div class="count" id="count" hidden>
-          <p class="label">Price goes up to ₦50,000 in</p>
-          <div class="clock"><div><b id="cd-h">00</b><span>Hours</span></div><div><b id="cd-m">00</b><span>Mins</span></div><div><b id="cd-s">00</b><span>Secs</span></div></div>
-        </div>
+        <p class="label" style="margin-top:14px">Bootcamp price</p>
+        <h2 id="join-title" class="price">₦50,000</h2>
         <div class="btns">
           <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
-          <p class="fine">New cohort starts: <span class="cohort">Sunday, October 25</span>.</p>
-          <a class="btn alt wl" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join the Waitlist<small>Not ready yet? Secure your discounted rate now</small></a>
+          <a class="btn alt wl" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join the Waitlist<small>Not ready yet? Get notified about the next cohort</small></a>
         </div>
       </div>
     </section>
@@ -212,28 +200,10 @@
   <footer>© Engr. Timothy Aderogba · Expertise Monetization System</footer>
 
   <script>
-    // Weekly price schedule in WAT (UTC+1, no DST), independent of the visitor's timezone.
-    // Mon 00:00 WAT = 0. Price is N50,000 from Thu 21:00 until Sat 19:00; countdown shows the 48h before Thu 21:00.
+    // Fixed price: ₦50,000 (the weekly webinar-attendee discount ended with the Saturday webinars).
     (function () {
-      var H = 3600000, UP = 3 * 24 * H + 21 * H, DOWN = 5 * 24 * H + 19 * H;
+      var H = 3600000;
       var $ = function (id) { return document.getElementById(id); };
-      function pad(n) { return (n < 10 ? '0' : '') + n; }
-      function tick() {
-        var d = new Date(Date.now() + H);
-        var t = ((d.getUTCDay() + 6) % 7) * 24 * H + d.getUTCHours() * H + d.getUTCMinutes() * 60000 + d.getUTCSeconds() * 1000 + d.getUTCMilliseconds();
-        var high = t >= UP && t < DOWN;
-        $('price').textContent = high ? '₦50,000' : '₦35,000';
-        $('old-price').hidden = !high;
-        $('warn').hidden = high;
-        var left = UP - t, show = left > 0 && left <= 48 * H;
-        $('count').hidden = !show;
-        if (show) {
-          var s = Math.floor(left / 1000);
-          $('cd-h').textContent = pad(Math.floor(s / 3600));
-          $('cd-m').textContent = pad(Math.floor(s % 3600 / 60));
-          $('cd-s').textContent = pad(s % 60);
-        }
-      }
       // Cohorts start every Sunday (WAT). Show the upcoming Sunday; it rolls over on Monday 00:00 WAT.
       (function () {
         var d = new Date(Date.now() + H);
@@ -242,7 +212,6 @@
         var label = 'Sunday, ' + m + ' ' + d.getUTCDate();
         document.querySelectorAll('.cohort').forEach(function (el) { el.textContent = label; });
       })();
-      tick(); setInterval(tick, 1000);
 
       // Sticky chat bar: only while neither the hero button nor the offer block is on screen.
       if ('IntersectionObserver' in window) {
