@@ -19,8 +19,6 @@
     p{margin:0;text-wrap:pretty} ul{margin:0;padding:0;list-style:none}
     a{color:inherit}
     .wrap{max-width:900px;margin:0 auto;padding:0 20px}
-    .strip{background:var(--navy-950);border-bottom:1px solid var(--line);text-align:center;padding:12px 20px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
-    .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:8px;vertical-align:middle}
     .hero{padding:64px 0 24px}
     .eyebrow{border-left:2px solid var(--red);padding-left:14px;margin-bottom:24px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
     h1{font-size:clamp(2.3rem,7vw,3.8rem)}
@@ -110,7 +108,6 @@
   <!-- End Meta Pixel Code -->
 </head>
 <body>
-  <div class="strip"><span class="dot"></span>Now enrolling · New cohort starts <span class="cohort">Sunday, October 25</span></div>
   <main class="wrap">
     <header class="hero">
       <p class="eyebrow">The Monetized Expertise Bootcamp</p>
@@ -147,7 +144,7 @@
     <section>
       <h2>30 days. Done-With-You.</h2>
       <div class="grid" style="grid-template-columns:1fr">
-        <div class="c"><b>The 30-Day Sprint</b>New cohort starts <span class="cohort">Sunday, October 25</span>. Intensive implementation over 4 weeks of direct execution. Done-With-You: we extract your expertise, build your offer and deploy custom AI acquisition systems side by side with you. Outcome: a fully structured, validated and market-ready consulting offering.</div>
+        <div class="c"><b>The 30-Day Sprint</b>Intensive implementation over 4 weeks of direct execution. Done-With-You: we extract your expertise, build your offer and deploy custom AI acquisition systems side by side with you. Outcome: a fully structured, validated and market-ready consulting offering.</div>
       </div>
     </section>
 
@@ -175,7 +172,7 @@
         <p class="label" style="margin-top:14px">Bootcamp price</p>
         <h2 id="join-title" class="price">₦50,000</h2>
         <div class="btns">
-          <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join Now</a>
+          <a class="btn" href="https://engrtim.serlzo.me/community/bootcamp/" data-track="InitiateCheckout">Pay to Join</a>
           <a class="btn alt wl" id="waitlist" href="https://forms.serlzo.site/2796f73e39c1ac25e8" data-track="Lead">Join the Waitlist<small>Not ready yet? Get notified about the next cohort</small></a>
         </div>
       </div>
@@ -200,19 +197,9 @@
   <footer>© Engr. Timothy Aderogba · Expertise Monetization System</footer>
 
   <script>
-    // Fixed price: ₦50,000 (the weekly webinar-attendee discount ended with the Saturday webinars).
+    // Fixed price: ₦50,000. No live cohort dates or enrollment wording on the page.
     (function () {
-      var H = 3600000;
       var $ = function (id) { return document.getElementById(id); };
-      // Cohorts start every Sunday (WAT). Show the upcoming Sunday; it rolls over on Monday 00:00 WAT.
-      (function () {
-        var d = new Date(Date.now() + H);
-        d.setUTCDate(d.getUTCDate() + (7 - d.getUTCDay()) % 7);
-        var m = ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getUTCMonth()];
-        var label = 'Sunday, ' + m + ' ' + d.getUTCDate();
-        document.querySelectorAll('.cohort').forEach(function (el) { el.textContent = label; });
-      })();
-
       // Sticky chat bar: only while neither the hero button nor the offer block is on screen.
       if ('IntersectionObserver' in window) {
         var vis = {};
