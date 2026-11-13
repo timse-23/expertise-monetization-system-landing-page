@@ -206,7 +206,7 @@ const LEGAL: Record<string, LegalDoc> = {
     title: "Privacy Policy",
     sections: [
       { h: "What we collect", p: "When you register for the webinar, you submit the details requested in the form, such as your name, email address and professional background." },
-      { h: "How we use it", p: "Your details are used only to register you for the webinar, send the access link and reminders, and tailor examples to your industry. We do not sell your information." },
+      { h: "How we use it", p: "Your details are used only to register you for the webinar, send you the access link, and tailor examples to your industry. We do not sell your information." },
       { h: "Advertising", p: "Visitors may arrive through paid social advertisements. Those platforms use their own tracking technologies under their own privacy policies." },
     ],
   },
@@ -216,7 +216,7 @@ const LEGAL: Record<string, LegalDoc> = {
       { h: "Educational only", p: "This is an educational webinar. Nothing on this page or inside the webinar is financial, legal, tax, employment or investment advice." },
       { h: "No guarantees", p: "Examples and case studies illustrate specific results. Individual results vary based on skill, effort, niche, market conditions, and execution." },
       { h: "Materials", p: "Frameworks and materials provided are for your personal use and may not be resold or redistributed." },
-      { h: "Changes", p: "Webinar dates and format may change at any time. Updates will be sent to the email you registered with." },
+      { h: "Changes", p: "Webinar content and format may change at any time. Updates will be sent to the email you registered with." },
     ],
   },
 };
@@ -262,29 +262,12 @@ function LegalModal({ doc, onClose }: { doc: LegalDoc | null; onClose: () => voi
    The funnel — one narrow column, straight from hook to registration
 --------------------------------------------------------------------------- */
 
-/* Weekly webinar: Saturdays 7:00PM WAT (UTC+1 = 18:00 UTC), starting Oct 17, 2026.
-   Once a session has started, the next Saturday's date is shown. */
-const WEBINAR_FIRST_UTC = Date.UTC(2026, 9, 17, 18, 0);
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-function nextWebinarDate(now: number) {
-  let next = WEBINAR_FIRST_UTC;
-  if (now >= next) next += Math.ceil((now - next + 1) / WEEK_MS) * WEEK_MS;
-  const d = new Date(next + 60 * 60 * 1000); // shift to WAT so getUTC* returns the Lagos calendar date
-  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
-}
+/* The webinar is on demand: registrants are sent to the /replay recording (see vercel.json). */
 
 export default function App() {
   const [legalKey, setLegalKey] = useState<"privacy" | "terms" | null>(null);
-  const [date, setDate] = useState(() => nextWebinarDate(Date.now()));
   const [heroCtaInView, setHeroCtaInView] = useState(true);
   const [formInView, setFormInView] = useState(false);
-
-  useEffect(() => {
-    const id = setInterval(() => setDate(nextWebinarDate(Date.now())), 60_000);
-    return () => clearInterval(id);
-  }, []);
 
   // The mobile bottom bar appears once the hero button has scrolled away, and hides while the form is on screen.
   useEffect(() => {
@@ -316,7 +299,7 @@ export default function App() {
       <div className="border-b border-white/10 bg-navy-950 text-white">
         <p className="mx-auto max-w-4xl px-4 py-3 text-center text-[11px] font-bold uppercase leading-snug tracking-[0.16em] text-white/80 sm:px-8 sm:tracking-[0.18em]">
           <span className="mr-2 inline-block h-2 w-2 rounded-full bg-red-600 align-middle" aria-hidden="true" />
-          Free Webinar · This Saturday · 7:00 PM (WAT) · Seats Are Limited
+          Free On-Demand Webinar · Watch Instantly
         </p>
       </div>
 
@@ -341,11 +324,11 @@ export default function App() {
 
             <Reveal delay={140}>
               <p className="mt-7 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-sm border border-white/15 bg-white/[0.06] px-4 py-2 text-sm font-bold uppercase tracking-[0.1em] text-white shadow-lg shadow-black/20 backdrop-blur-sm">
-                <span className="text-red-400">Live Webinar</span>
+                <span className="text-red-400">On-Demand Webinar</span>
                 <span className="text-white/30" aria-hidden="true">·</span>
-                <span>This Saturday, {date}</span>
+                <span>Free</span>
                 <span className="text-white/30" aria-hidden="true">·</span>
-                <span className="whitespace-nowrap">7:00 PM WAT</span>
+                <span className="whitespace-nowrap">Watch Anytime</span>
               </p>
             </Reveal>
 
@@ -353,15 +336,15 @@ export default function App() {
               <div className="mt-8 max-w-3xl space-y-4 text-lg leading-relaxed text-white/80 md:text-xl">
                 <p>You have spent years learning, gaining experience, and solving problems at work. But have you ever thought about turning what you know into a business of your own?</p>
                 <p>
-                  Join this live webinar to learn how to turn your skills and experience into a <strong className="font-semibold text-white">consulting and coaching business that people will pay for.</strong>
+                  Watch this free webinar to learn how to turn your skills and experience into a <strong className="font-semibold text-white">consulting and coaching business that people will pay for.</strong>
                 </p>
                 <p>You don’t have to quit your job, become an influencer, or spend months learning complicated technology to get started.</p>
               </div>
             </Reveal>
 
             <Reveal delay={260} className="mt-10">
-              <CtaButton id="hero-cta" label="Save My Seat" />
-              <p className="mt-4 text-sm text-white/60">Registration takes less than 60 seconds. Seats are limited.</p>
+              <CtaButton id="hero-cta" label="Watch the Webinar" />
+              <p className="mt-4 text-sm text-white/60">Register in less than 60 seconds and watch instantly.</p>
             </Reveal>
 
             <Reveal delay={320} className="mt-12">
@@ -440,9 +423,9 @@ export default function App() {
             <Reveal delay={80}>
               <div className="mt-8 space-y-4 text-lg leading-relaxed text-white/80 md:text-xl">
                 <p>
-                  This Saturday, Business Growth Consultant <strong className="font-semibold text-white">Engr. Timothy Aderogba</strong> will show you how to take what you already know and turn it into a consulting or coaching business.
+                  In this webinar, Business Growth Consultant <strong className="font-semibold text-white">Engr. Timothy Aderogba</strong> shows you how to take what you already know and turn it into a consulting or coaching business.
                 </p>
-                <p>During this free live webinar, you will learn a practical 7-step process for packaging your skills into a service people can pay for.</p>
+                <p>In this free on-demand webinar, you will learn a practical 7-step process for packaging your skills into a service people can pay for.</p>
                 <p>
                   <strong className="font-semibold text-white">More than {REGISTRANTS} professionals</strong> have already registered across previous sessions to learn how to package their expertise into business offers.
                 </p>
@@ -464,8 +447,8 @@ export default function App() {
             </Reveal>
 
             <Reveal delay={180} className="mt-12">
-              <CtaButton label="Register for the Webinar" />
-              <p className="mt-4 text-sm font-semibold text-white/70">Saturday, {date} · 7:00 PM WAT</p>
+              <CtaButton label="Watch the Webinar" />
+              <p className="mt-4 text-sm font-semibold text-white/70">On demand · Watch instantly after you register</p>
             </Reveal>
           </div>
         </section>
@@ -475,7 +458,7 @@ export default function App() {
           <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 md:py-24">
             <Reveal>
               <h2 id="who-title" className="font-display text-3xl font-black leading-tight tracking-tight text-navy-900 md:text-5xl">
-                Who Should Attend?
+                Who Should Watch?
               </h2>
               <p className="mt-6 text-lg font-semibold text-navy-900 md:text-xl">This webinar is for you if:</p>
             </Reveal>
@@ -491,13 +474,13 @@ export default function App() {
 
             <Reveal delay={120}>
               <p className="mt-8 text-lg leading-relaxed text-slate-600">
-                You don’t need to have an existing consulting business. You can attend to learn how to get started with the experience you already have.
+                You don’t need to have an existing consulting business. You can watch to learn how to get started with the experience you already have.
               </p>
             </Reveal>
 
             <Reveal delay={160} className="mt-10">
-              <CtaButton label="Save My Seat" />
-              <p className="mt-4 text-sm text-slate-500">Registration takes less than 60 seconds.</p>
+              <CtaButton label="Watch the Webinar" />
+              <p className="mt-4 text-sm text-slate-500">Register in less than 60 seconds and watch instantly.</p>
             </Reveal>
           </div>
         </section>
@@ -529,7 +512,7 @@ export default function App() {
                 <p>Engr. Timothy Aderogba is a Business Growth Consultant and Go-to-Market Systems Engineer.</p>
                 <p>He helps professionals turn their work experience and skills into consulting offers that businesses and individuals can pay for.</p>
                 <p>He also helps set up systems and use AI tools to make it easier to find potential clients and manage business activities.</p>
-                <p>During this webinar, he will share the steps you can follow to start turning your knowledge into a business opportunity.</p>
+                <p>In this webinar, he shares the steps you can follow to start turning your knowledge into a business opportunity.</p>
               </div>
             </Reveal>
           </div>
@@ -552,12 +535,12 @@ export default function App() {
             <Reveal delay={80} className="mt-10">
               <dl className="grid gap-px overflow-hidden rounded-md border border-white/15 bg-white/15 text-left shadow-lg shadow-black/25 sm:grid-cols-3">
                 <div className="bg-navy-900/90 px-5 py-4">
-                  <dt className="text-xs font-bold uppercase tracking-[0.16em] text-red-400">Date</dt>
-                  <dd className="mt-1 font-semibold text-white">Saturday, {date}</dd>
+                  <dt className="text-xs font-bold uppercase tracking-[0.16em] text-red-400">Format</dt>
+                  <dd className="mt-1 font-semibold text-white">On-demand recording</dd>
                 </div>
                 <div className="bg-navy-900/90 px-5 py-4">
-                  <dt className="text-xs font-bold uppercase tracking-[0.16em] text-red-400">Time</dt>
-                  <dd className="mt-1 font-semibold text-white">7:00 PM (WAT)</dd>
+                  <dt className="text-xs font-bold uppercase tracking-[0.16em] text-red-400">When</dt>
+                  <dd className="mt-1 font-semibold text-white">Watch instantly, anytime</dd>
                 </div>
                 <div className="bg-navy-900/90 px-5 py-4">
                   <dt className="text-xs font-bold uppercase tracking-[0.16em] text-red-400">Access</dt>
@@ -570,7 +553,7 @@ export default function App() {
               <div id="register" className="scroll-mt-4 rounded-md border-t-4 border-red-600 bg-white p-6 text-[#0f1c2e] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.65)] sm:p-9">
                 <h3 className="font-display text-2xl font-black tracking-tight text-navy-900 md:text-3xl">Here’s How to Join</h3>
                 <p className="mb-6 mt-3 text-base leading-relaxed text-slate-600">
-                  Complete your registration below to secure your seat and access the meeting link. We will send you reminders before we go live.
+                  Complete your registration below and you will be taken straight to the webinar recording.
                 </p>
                 <RegistrationForm />
               </div>
@@ -613,9 +596,9 @@ export default function App() {
           tabIndex={showBar ? 0 : -1}
           className="flex w-full items-center justify-center gap-2 rounded-md bg-red-600 py-3.5 text-base font-bold uppercase tracking-wide !text-white active:bg-red-700"
         >
-          Save My Seat <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          Watch the Webinar <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </a>
-        <p className="mt-1.5 text-center text-[10px] font-semibold uppercase leading-snug tracking-[0.1em] text-white/70">Free Webinar | This Saturday | 7:00PM | Seats Are Limited</p>
+        <p className="mt-1.5 text-center text-[10px] font-semibold uppercase leading-snug tracking-[0.1em] text-white/70">Free On-Demand Webinar | Watch Instantly</p>
       </div>
 
       {legalKey && <LegalModal doc={LEGAL[legalKey]} onClose={() => setLegalKey(null)} />}

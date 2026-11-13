@@ -1,5 +1,7 @@
 {
   "redirects": [
+    { "source": "/registered", "destination": "/replay", "permanent": false },
+    { "source": "/registered/", "destination": "/replay", "permanent": false },
     {
       "source": "/:path((?!images/|privacy.html|terms.html|index.html|top-10-industries-needing-consulting-services|bootcamp|registered|replay|favicon|robots.txt|sitemap.xml).+)",
       "destination": "/",
