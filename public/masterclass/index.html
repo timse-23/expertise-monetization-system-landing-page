@@ -75,6 +75,9 @@
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:420px;padding:19px 26px;background:var(--red);color:#fff;font-weight:800;font-size:1.12rem;letter-spacing:.02em;text-decoration:none;border-radius:4px;box-shadow:0 7px 0 var(--red-dark),0 18px 40px rgba(227,18,31,.28);transition:transform .08s,box-shadow .08s,background .2s}
     .btn:hover{background:#f42a36}
     .btn:active{transform:translateY(7px);box-shadow:0 0 0 var(--red-dark)}
+    .btn.ghost{background:transparent;border:2px solid rgba(217,178,95,.7);color:var(--gold);box-shadow:none;font-size:1rem;padding:15px 24px}
+    .btn.ghost:hover{background:rgba(217,178,95,.1);border-color:var(--gold);color:#fff}
+    .btn.ghost:active{transform:none}
     .btn .p{padding-left:12px;border-left:1px solid rgba(255,255,255,.35)}
     .wl{font-size:15px;font-weight:600;color:var(--soft);text-decoration:underline;text-decoration-color:rgba(217,178,95,.6);text-underline-offset:5px}
     .wl:hover{color:#fff;text-decoration-color:var(--gold)}
@@ -223,8 +226,8 @@
         </div>
 
         <div class="btns">
-          <a class="btn" id="hero-cta" href="https://nestuge.com/smart-ai-masterclass" target="_blank" rel="noopener" data-track="InitiateCheckout">Pay Now <span class="p">₦9,999</span></a>
-          <a class="wl" href="https://forms.gle/su4zd8Ax3PULhYs29" target="_blank" rel="noopener" data-track="Lead">Not ready to pay? Join the waitlist →</a>
+          <a class="btn" id="hero-cta" href="#join">I’m Ready ↓</a>
+          <a class="btn ghost" href="/masterclass-replay">▶ Watch the Masterclass Replay</a>
         </div>
       </div>
     </div>
